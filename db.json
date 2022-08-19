@@ -1,0 +1,28 @@
+{
+  "todo": [
+    {
+      "id": 1,
+      "name": "Compelete online Javascript course"
+    },
+    {
+      "id": 2,
+      "name": "Jog around the park 3x"
+    },
+    {
+      "id": 3,
+      "name": "10 minutes meditation"
+    },
+    {
+      "id": 4,
+      "name": "Read for 1 hour"
+    },
+    {
+      "id": 5,
+      "name": "Pick up groceries"
+    },
+    {
+      "id": 6,
+      "name": "Complete Todo App on Frontend"
+    }
+  ]
+}
