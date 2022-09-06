@@ -2,6 +2,11 @@ import { useEffect, useState } from "react";
 import darkImg from "../images/bg-desktop-dark.jpg";
 import "./App.css";
 
+interface TIME {
+  id: number;
+  name: string;
+}
+
 function App() {
   const [todos, setTodos] = useState([]);
 
@@ -46,7 +51,7 @@ function App() {
             ></input>
           </div>
           <div>
-            {todos.map((todo) => {
+            {todos.map((todo: TIME) => {
               return (
                 <p
                   style={{
@@ -74,7 +79,7 @@ function App() {
               fontSize: "13px",
             }}
           >
-            <div style={{ textAlign: "start" }}>items left</div>
+            <div style={{ textAlign: "start" }}>5 items left</div>
             <div
               style={{
                 display: "grid",
