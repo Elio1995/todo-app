@@ -103,6 +103,7 @@ function App() {
             {todos.map((todo: TIME) => {
               return (
                 <p
+                  key={todo.id}
                   style={{
                     backgroundColor: "hsl(235, 24%, 19%)",
                     height: "50px",
