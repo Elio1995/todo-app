@@ -6,6 +6,7 @@ import "./App.css";
 interface TIME {
   id: number;
   name: string;
+  status: string;
 }
 
 function App() {
@@ -21,11 +22,25 @@ function App() {
         setTodos(data);
       });
   }
-
+  function getActiveTodoList() {
+    return fetch(`http://localhost:3000/todo`)
+      .then((response) => response.json())
+      .then((data) => {
+        setTodos(data.filter((todo: TIME) => todo.status === "Active"));
+      });
+  }
+  function getCompletedTodoList() {
+    return fetch(`http://localhost:3000/todo`)
+      .then((response) => response.json())
+      .then((data) => {
+        setTodos(data.filter((todo: TIME) => todo.status === "Completed"));
+      });
+  }
   function handleSubmit(e: any) {
     const data: TIME = {
       id: Math.random() * (1000 - 1) + 1,
       name: todoRef.current.value,
+      status: "Active",
     };
 
     fetch("http://localhost:3000/todo", {
@@ -42,22 +57,6 @@ function App() {
       .catch((error) => {
         console.error("Error:", error);
       });
-
-    // const form = e.currentTarget;
-    // e.preventDefault();
-    // e.stopPropagation();
-
-    // setLoading(true);
-
-    // let uD = JSON.parse(JSON.stringify(todos));
-
-    // uD["id"] = Math.random() * (1000 - 1) + 1;
-    // uD["name"] = todoRef.current.value;
-
-    // // setTimeout(() => {
-    // setValidated(true);
-    // setLoading(false);
-    // // }, 2000);
   }
   useEffect(() => {
     getTodoList();
@@ -129,7 +128,7 @@ function App() {
               fontSize: "13px",
             }}
           >
-            <div style={{ textAlign: "start" }}>5 items left</div>
+            <div style={{ textAlign: "start" }}>{todos.length} items left</div>
             <div
               style={{
                 display: "grid",
@@ -138,9 +137,9 @@ function App() {
                 fontWeight: "800",
               }}
             >
-              <span>All</span>
-              <span>Active</span>
-              <span>Completed</span>
+              <span onClick={getTodoList}>All</span>
+              <span onClick={getActiveTodoList}>Active</span>
+              <span onClick={getCompletedTodoList}>Completed</span>
             </div>
             <div style={{ textAlign: "end" }}>Clear Completed</div>
           </div>

@@ -2,27 +2,43 @@
   "todo": [
     {
       "id": 1,
-      "name": "Compelete online Javascript course"
+      "name": "Compelete online Javascript course",
+      "status": "Active"
     },
     {
       "id": 2,
-      "name": "Jog around the park 3x"
+      "name": "Jog around the park 3x",
+      "status": "Active"
     },
     {
       "id": 3,
-      "name": "10 minutes meditation"
+      "name": "10 minutes meditation",
+      "status": "Active"
     },
     {
       "id": 4,
-      "name": "Read for 1 hour"
+      "name": "Read for 1 hour",
+      "status": "Active"
     },
     {
       "id": 5,
-      "name": "Pick up groceries"
+      "name": "Pick up groceries",
+      "status": "Completed"
     },
     {
       "id": 6,
-      "name": "Complete Todo App on Frontend"
+      "name": "Complete Todo App on Frontend",
+      "status": "Completed"
+    },
+    {
+      "id": 184.7608745354249,
+      "name": "Writting some code",
+      "status": "Active"
+    },
+    {
+      "id": 162.98574814181498,
+      "name": "Cleaning the compouter",
+      "status": "Active"
     }
   ]
 }
