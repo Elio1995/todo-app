@@ -80,68 +80,90 @@ function App() {
             <p style={{ textAlign: "end" }}>TODO</p>
           </div>
           <div>
-            <form noValidate onSubmit={handleSubmit}>
-              <label htmlFor="html">HTML</label>
+            <form
+              style={{
+                display: "grid",
+                gridTemplateColumns: "5fr 1fr",
+              }}
+              onSubmit={handleSubmit}
+            >
               <input
                 style={{
-                  width: "100%",
                   height: "50px",
                   backgroundColor: "hsl(235, 24%, 19%)",
                   border: "none",
                   marginBottom: "30px",
+                  paddingLeft: "30px",
+                  fontSize: "20px",
+                  borderRadius: "5px",
+                  marginRight: "10px",
                 }}
+                placeholder="Write a Todo"
                 type="text"
                 ref={todoRef}
               ></input>
-              <button disabled={loading} type="submit">
+              <button
+                style={{
+                  height: "50px",
+                  fontSize: "12px",
+                  borderRadius: "5px",
+                  padding: "0",
+                }}
+                disabled={loading}
+                type="submit"
+              >
                 Add Todo
               </button>
             </form>
           </div>
-          <div>
-            {todos.map((todo: TIME) => {
-              return (
-                <p
-                  key={todo.id}
-                  style={{
-                    backgroundColor: "hsl(235, 24%, 19%)",
-                    height: "50px",
-                    margin: "0",
-                    paddingLeft: "30px",
-                    borderBottom: "solid 1px grey",
-                    display: "flex",
-                    placeItems: "center",
-                  }}
-                >
-                  {todo.name}
-                </p>
-              );
-            })}
-          </div>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "5fr 6fr 5fr",
-              backgroundColor: "hsl(235, 24%, 19%)",
-              height: "40px",
-              padding: "20px 30px 0px 30px",
-              fontSize: "13px",
-            }}
-          >
-            <div style={{ textAlign: "start" }}>{todos.length} items left</div>
+          <div style={{ border: "1px solid transparent", borderRadius: "5px" }}>
+            <div style={{ borderRadius: "5px" }}>
+              {todos.map((todo: TIME) => {
+                return (
+                  <p
+                    key={todo.id}
+                    style={{
+                      backgroundColor: "hsl(235, 24%, 19%)",
+                      height: "50px",
+                      margin: "0",
+                      paddingLeft: "30px",
+                      borderBottom: "solid 1px grey",
+                      display: "flex",
+                      placeItems: "center",
+                    }}
+                  >
+                    {todo.name}
+                  </p>
+                );
+              })}
+            </div>
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr 1fr",
-                textAlign: "start",
-                fontWeight: "800",
+                gridTemplateColumns: "5fr 6fr 5fr",
+                backgroundColor: "hsl(235, 24%, 19%)",
+                height: "40px",
+                padding: "20px 30px 0px 30px",
+                fontSize: "13px",
               }}
             >
-              <span onClick={getTodoList}>All</span>
-              <span onClick={getActiveTodoList}>Active</span>
-              <span onClick={getCompletedTodoList}>Completed</span>
+              <div style={{ textAlign: "start" }}>
+                {todos.length} items left
+              </div>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr 1fr",
+                  textAlign: "start",
+                  fontWeight: "800",
+                }}
+              >
+                <span onClick={getTodoList}>All</span>
+                <span onClick={getActiveTodoList}>Active</span>
+                <span onClick={getCompletedTodoList}>Completed</span>
+              </div>
+              <div style={{ textAlign: "end" }}>Clear Completed</div>
             </div>
-            <div style={{ textAlign: "end" }}>Clear Completed</div>
           </div>
         </div>
       </div>
