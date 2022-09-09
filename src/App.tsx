@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import darkImg from "../images/bg-desktop-dark.jpg";
 import sun from "../images/icon-sun.svg";
+import moon from "../images/icon-moon.svg";
 
 import "./App.css";
 
@@ -14,6 +15,8 @@ function App() {
   const [todos, setTodos] = useState([]);
   const todoRef = useRef();
   const [loading, setLoading] = useState(false);
+  const [mode, setMode] = useState(false);
+
   const [validated, setValidated] = useState(false);
 
   function getTodoList() {
@@ -59,13 +62,20 @@ function App() {
         console.error("Error:", error);
       });
   }
+  function statusChange() {}
   useEffect(() => {
     getTodoList();
   }, []);
   console.log("TODO", todos);
+  console.log("mode", mode);
 
   return (
-    <>
+    <div
+      style={{
+        backgroundColor: mode === false ? "hsl(235, 21%, 11%)" : "white",
+        height: "100vh",
+      }}
+    >
       <img style={{ width: "100vw" }} src={darkImg}></img>
       <div className="App">
         <div
@@ -93,8 +103,11 @@ function App() {
                 textAlign: "end",
               }}
             >
-              {" "}
-              <img src={sun} />
+              <img
+                onClick={() => setMode(!mode)}
+                style={{ cursor: "pointer" }}
+                src={mode === false ? sun : moon}
+              />
             </div>
           </div>
           <div>
@@ -108,7 +121,8 @@ function App() {
               <input
                 style={{
                   height: "50px",
-                  backgroundColor: "hsl(235, 24%, 19%)",
+                  backgroundColor:
+                    mode === false ? "hsl(235, 24%, 19%)" : "white",
                   border: "none",
                   marginBottom: "30px",
                   paddingLeft: "30px",
@@ -122,10 +136,13 @@ function App() {
               ></input>
               <button
                 style={{
-                  height: "50px",
+                  height: "52px",
                   fontSize: "15px",
                   borderRadius: "5px",
                   padding: "0",
+                  backgroundColor:
+                    mode === false ? "hsl(235, 24%, 19%)" : "white",
+                  color: mode === false ? "white" : "hsl(235, 24%, 19%)",
                 }}
                 disabled={loading}
                 type="submit"
@@ -142,7 +159,10 @@ function App() {
                     style={{
                       display: "grid",
                       gridTemplateColumns: "5fr 1fr",
-                      backgroundColor: "hsl(235, 24%, 19%)",
+
+                      backgroundColor:
+                        mode === false ? "hsl(235, 24%, 19%)" : "white",
+                      color: mode === false ? "white" : "hsl(235, 24%, 19%)",
                       borderBottom: "solid 1px grey",
                     }}
                   >
@@ -154,7 +174,12 @@ function App() {
                         paddingLeft: "30px",
                         display: "flex",
                         placeItems: "center",
-                        color: todo.status === "Completed" ? "grey" : "white",
+                        color:
+                          todo.status === "Completed"
+                            ? "grey"
+                            : mode === false
+                            ? "white"
+                            : "hsl(235, 24%, 19%)",
                         textDecorationLine:
                           todo.status === "Completed" ? "line-through" : "none",
                       }}
@@ -184,13 +209,20 @@ function App() {
               style={{
                 display: "grid",
                 gridTemplateColumns: "5fr 6fr 5fr",
-                backgroundColor: "hsl(235, 24%, 19%)",
+                backgroundColor:
+                  mode === false ? "hsl(235, 24%, 19%)" : "white",
                 height: "40px",
                 padding: "20px 30px 0px 30px",
                 fontSize: "13px",
+                borderBottom: "solid 1px grey",
               }}
             >
-              <div style={{ textAlign: "start" }}>
+              <div
+                style={{
+                  color: mode === false ? "white" : "hsl(235, 24%, 19%)",
+                  textAlign: "start",
+                }}
+              >
                 {todos.length} items left
               </div>
               <div
@@ -199,6 +231,8 @@ function App() {
                   gridTemplateColumns: "1fr 1fr 1fr",
                   textAlign: "start",
                   fontWeight: "800",
+
+                  color: mode === false ? "white" : "hsl(235, 24%, 19%)",
                 }}
               >
                 <span style={{ cursor: "pointer" }} onClick={getTodoList}>
@@ -214,12 +248,19 @@ function App() {
                   Completed
                 </span>
               </div>
-              <div style={{ textAlign: "end" }}>Clear Completed</div>
+              <div
+                style={{
+                  color: mode === false ? "white" : "hsl(235, 24%, 19%)",
+                  textAlign: "end",
+                }}
+              >
+                Clear Completed
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
