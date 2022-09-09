@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import darkImg from "../images/bg-desktop-dark.jpg";
+import sun from "../images/icon-sun.svg";
 
 import "./App.css";
 
@@ -70,14 +71,31 @@ function App() {
         <div
           style={{
             position: "absolute",
-            top: "80px",
+            top: "40px",
             width: "500px",
             height: "600px",
           }}
         >
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-            <p style={{ textAlign: "start" }}>TODO</p>
-            <p style={{ textAlign: "end" }}>TODO</p>
+            <p
+              style={{
+                textAlign: "start",
+                fontSize: "30px",
+                letterSpacing: "10px",
+                fontWeight: "900",
+              }}
+            >
+              TODO
+            </p>
+            <div
+              style={{
+                marginTop: "30px",
+                textAlign: "end",
+              }}
+            >
+              {" "}
+              <img src={sun} />
+            </div>
           </div>
           <div>
             <form
