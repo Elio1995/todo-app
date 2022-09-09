@@ -98,14 +98,14 @@ function App() {
                   borderRadius: "5px",
                   marginRight: "10px",
                 }}
-                placeholder="Write a Todo"
+                placeholder="Add a Todo"
                 type="text"
                 ref={todoRef}
               ></input>
               <button
                 style={{
                   height: "50px",
-                  fontSize: "12px",
+                  fontSize: "15px",
                   borderRadius: "5px",
                   padding: "0",
                 }}
@@ -120,20 +120,45 @@ function App() {
             <div style={{ borderRadius: "5px" }}>
               {todos.map((todo: TIME) => {
                 return (
-                  <p
-                    key={todo.id}
+                  <div
                     style={{
+                      display: "grid",
+                      gridTemplateColumns: "5fr 1fr",
                       backgroundColor: "hsl(235, 24%, 19%)",
-                      height: "50px",
-                      margin: "0",
-                      paddingLeft: "30px",
                       borderBottom: "solid 1px grey",
-                      display: "flex",
-                      placeItems: "center",
                     }}
                   >
-                    {todo.name}
-                  </p>
+                    <p
+                      key={todo.id}
+                      style={{
+                        height: "50px",
+                        margin: "0",
+                        paddingLeft: "30px",
+                        display: "flex",
+                        placeItems: "center",
+                        color: todo.status === "Completed" ? "grey" : "white",
+                        textDecorationLine:
+                          todo.status === "Completed" ? "line-through" : "none",
+                      }}
+                    >
+                      {todo.name}
+                    </p>
+                    {todo.status === "Active" ? (
+                      <span
+                        style={{
+                          display: "flex",
+                          placeItems: "center",
+                          justifyContent: "center",
+                          fontSize: "14px",
+                          cursor: "pointer",
+                        }}
+                      >
+                        Complete
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 );
               })}
             </div>
@@ -158,9 +183,18 @@ function App() {
                   fontWeight: "800",
                 }}
               >
-                <span onClick={getTodoList}>All</span>
-                <span onClick={getActiveTodoList}>Active</span>
-                <span onClick={getCompletedTodoList}>Completed</span>
+                <span style={{ cursor: "pointer" }} onClick={getTodoList}>
+                  All
+                </span>
+                <span style={{ cursor: "pointer" }} onClick={getActiveTodoList}>
+                  Active
+                </span>
+                <span
+                  style={{ cursor: "pointer" }}
+                  onClick={getCompletedTodoList}
+                >
+                  Completed
+                </span>
               </div>
               <div style={{ textAlign: "end" }}>Clear Completed</div>
             </div>
