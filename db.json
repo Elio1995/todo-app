@@ -1,19 +1,9 @@
 {
   "todo": [
     {
-      "id": 1,
-      "name": "Compelete online Javascript course",
-      "status": "Active"
-    },
-    {
       "id": 2,
       "name": "Jog around the park 3x",
-      "status": "Active"
-    },
-    {
-      "id": 3,
-      "name": "10 minutes meditation",
-      "status": "Active"
+      "status": "Completed"
     },
     {
       "id": 4,
@@ -38,6 +28,11 @@
     {
       "id": 962.3111118250409,
       "name": "Meeting a friend",
+      "status": "Active"
+    },
+    {
+      "id": 82.84676677465492,
+      "name": "Workout for 1h",
       "status": "Active"
     }
   ]
