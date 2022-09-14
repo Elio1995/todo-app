@@ -5,7 +5,11 @@ import "../App.css";
 
 export default function Todos(props) {
   return (
-    <div>
+    <div
+      style={{
+        boxShadow: props.mode === true ? "0 10px 10px -5px #E0E0E0" : "none",
+      }}
+    >
       <div>
         {props.todos.map((todo: TODO) => {
           return (
@@ -16,7 +20,10 @@ export default function Todos(props) {
                 backgroundColor:
                   props.mode === false ? "hsl(235, 24%, 19%)" : "white",
                 color: props.mode === false ? "white" : "hsl(235, 24%, 19%)",
-                borderBottom: "solid 1px grey",
+                borderBottom:
+                  props.mode === true
+                    ? "solid 1px hsl(236, 33%, 92%)"
+                    : "solid 1px grey",
                 paddingTop: "8px",
               }}
               className="todos"
@@ -31,10 +38,12 @@ export default function Todos(props) {
                   placeItems: "center",
                   color:
                     todo.status === "Completed"
-                      ? "grey"
+                      ? props.mode === false
+                        ? "grey"
+                        : "hsl(236, 9%, 61%)"
                       : props.mode === false
                       ? "white"
-                      : "hsl(235, 24%, 19%)",
+                      : "hsl(235, 19%, 35%)",
                   textDecorationLine:
                     todo.status === "Completed" ? "line-through" : "none",
                 }}
@@ -118,7 +127,6 @@ export default function Todos(props) {
           height: "40px",
           padding: "20px 30px 0px 30px",
           fontSize: "13px",
-          borderBottom: "solid 1px grey",
         }}
       >
         <div
