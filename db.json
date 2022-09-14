@@ -18,12 +18,7 @@
     {
       "id": 767.123225056013,
       "name": "Write some code",
-      "status": "Active"
-    },
-    {
-      "id": 340.74053144713406,
-      "name": "12345",
-      "status": "Active"
+      "status": "Completed"
     },
     {
       "id": 962.3111118250409,
@@ -33,6 +28,11 @@
     {
       "id": 82.84676677465492,
       "name": "Workout for 1h",
+      "status": "Active"
+    },
+    {
+      "id": 995.4251945536749,
+      "name": "Listen to music for 1 hour",
       "status": "Active"
     }
   ]

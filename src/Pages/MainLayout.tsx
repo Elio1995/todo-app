@@ -7,6 +7,7 @@ import { TODO } from "../App";
 import "../App.css";
 import Header from "../Components/Header";
 import Input from "../Components/Input";
+import Todos from "../Components/Todos";
 
 // interface TODO {
 //   id: number;
@@ -16,12 +17,8 @@ import Input from "../Components/Input";
 
 export default function MainLayout() {
   const [todos, setTodos] = useState([]);
-  const todoRef = useRef();
-  const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState(false);
   const [selectedTodoId, setTodoId] = useState(Number);
-
-  const [validated, setValidated] = useState(false);
 
   function getTodoList() {
     return fetch(`http://localhost:3000/todo`)
@@ -44,28 +41,6 @@ export default function MainLayout() {
         setTodos(data.filter((todo: TODO) => todo.status === "Completed"));
       });
   }
-  function handleSubmit(e: any) {
-    const data: TODO = {
-      id: Math.random() * (1000 - 1) + 1,
-      name: todoRef.current.value,
-      status: "Active",
-    };
-
-    fetch("http://localhost:3000/todo", {
-      method: "POST", // or 'PUT'
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }
 
   const selectedTodo: undefined | TODO = todos.find(
     (todo: TODO | undefined) => todo?.id === selectedTodoId
@@ -73,7 +48,6 @@ export default function MainLayout() {
   const selectedId = selectedTodo?.id;
 
   function statusChange() {
-    // selectedActiveTodo?.status === "Completed";
     return fetch(`http://localhost:3000/todo/${selectedId}`, {
       method: "PATCH",
       body: JSON.stringify({
@@ -88,7 +62,6 @@ export default function MainLayout() {
       .then((json) => console.log(json));
   }
   function deleteTodo() {
-    // selectedActiveTodo?.status === "Completed";
     return fetch(`http://localhost:3000/todo/${selectedId}`, {
       method: "DELETE",
       headers: {
@@ -124,160 +97,17 @@ export default function MainLayout() {
         >
           <Header mode={mode} setMode={setMode} />
           <Input mode={mode} />
-          <div style={{ border: "1px solid transparent", borderRadius: "5px" }}>
-            <div style={{ borderRadius: "5px" }}>
-              {todos.map((todo: TODO) => {
-                return (
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "5fr 1fr",
-
-                      backgroundColor:
-                        mode === false ? "hsl(235, 24%, 19%)" : "white",
-                      color: mode === false ? "white" : "hsl(235, 24%, 19%)",
-                      borderBottom: "solid 1px grey",
-                    }}
-                  >
-                    <p
-                      key={todo.id}
-                      style={{
-                        height: "50px",
-                        margin: "0",
-                        paddingLeft: "30px",
-                        display: "flex",
-                        placeItems: "center",
-                        color:
-                          todo.status === "Completed"
-                            ? "grey"
-                            : mode === false
-                            ? "white"
-                            : "hsl(235, 24%, 19%)",
-                        textDecorationLine:
-                          todo.status === "Completed" ? "line-through" : "none",
-                      }}
-                    >
-                      {todo.name}
-                    </p>
-                    {todo.status === "Completed" ? (
-                      <div
-                        style={{
-                          display: "flex",
-                          placeItems: "center",
-                          justifyContent: "center",
-                          fontSize: "14px",
-                          paddingRight: "20px",
-                        }}
-                      >
-                        <span
-                          style={{
-                            marginRight: "20px",
-                          }}
-                          onClick={() => setTodoId(todo.id)}
-                        >
-                          Select
-                        </span>
-
-                        <span onClick={() => deleteTodo() && getTodoList()}>
-                          X
-                        </span>
-                      </div>
-                    ) : (
-                      ""
-                    )}
-                    {todo.status === "Active" ? (
-                      <div
-                        style={{
-                          display: "flex",
-                          placeItems: "center",
-                          justifyContent: "center",
-                          fontSize: "14px",
-                          paddingRight: "20px",
-                        }}
-                      >
-                        <span
-                          style={{
-                            marginRight: "20px",
-                          }}
-                          onClick={() => setTodoId(todo.id)}
-                        >
-                          Select
-                        </span>
-                        <span
-                          style={{
-                            marginRight: "20px",
-                          }}
-                          onClick={() => statusChange() && getTodoList()}
-                        >
-                          Complete
-                        </span>
-                        <span onClick={() => deleteTodo() && getTodoList()}>
-                          X
-                        </span>
-                      </div>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                backgroundColor:
-                  mode === false ? "hsl(235, 24%, 19%)" : "white",
-                height: "40px",
-                padding: "20px 30px 0px 30px",
-                fontSize: "13px",
-                borderBottom: "solid 1px grey",
-              }}
-            >
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr 1fr",
-                  textAlign: "start",
-                  fontWeight: "800",
-
-                  color: mode === false ? "white" : "hsl(235, 24%, 19%)",
-                }}
-              >
-                <span style={{ cursor: "pointer" }} onClick={getTodoList}>
-                  All
-                </span>
-                <span style={{ cursor: "pointer" }} onClick={getActiveTodoList}>
-                  Active
-                </span>
-                <span
-                  style={{ cursor: "pointer" }}
-                  onClick={getCompletedTodoList}
-                >
-                  Completed
-                </span>
-              </div>
-              <div
-                style={{
-                  color: mode === false ? "white" : "hsl(235, 24%, 19%)",
-                  textAlign: "end",
-                }}
-              >
-                {todos.length} items left
-              </div>
-              {/* <div
-                style={{
-                  color: mode === false ? "white" : "hsl(235, 24%, 19%)",
-                  textAlign: "end",
-                }}
-              >
-                <span onClick={() => deleteCompletedTodo() && getTodoList()}>
-                  {" "}
-                  Clear Completed
-                </span>
-              </div> */}
-            </div>
-          </div>
+          <Todos
+            todos={todos}
+            setTodos={setTodos}
+            getTodoList={getTodoList}
+            getActiveTodoList={getActiveTodoList}
+            getCompletedTodoList={getCompletedTodoList}
+            statusChange={statusChange}
+            deleteTodo={deleteTodo}
+            mode={mode}
+            setTodoId={setTodoId}
+          />
         </div>
       </div>
     </div>
