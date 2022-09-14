@@ -5,7 +5,7 @@ import moon from "../images/icon-moon.svg";
 
 import "./App.css";
 
-interface TIME {
+interface TODO {
   id: number;
   name: string;
   status: string;
@@ -16,6 +16,7 @@ function App() {
   const todoRef = useRef();
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState(false);
+  const [selectedTodoId, setTodoId] = useState(Number);
 
   const [validated, setValidated] = useState(false);
 
@@ -30,18 +31,18 @@ function App() {
     return fetch(`http://localhost:3000/todo`)
       .then((response) => response.json())
       .then((data) => {
-        setTodos(data.filter((todo: TIME) => todo.status === "Active"));
+        setTodos(data.filter((todo: TODO) => todo.status === "Active"));
       });
   }
   function getCompletedTodoList() {
     return fetch(`http://localhost:3000/todo`)
       .then((response) => response.json())
       .then((data) => {
-        setTodos(data.filter((todo: TIME) => todo.status === "Completed"));
+        setTodos(data.filter((todo: TODO) => todo.status === "Completed"));
       });
   }
   function handleSubmit(e: any) {
-    const data: TIME = {
+    const data: TODO = {
       id: Math.random() * (1000 - 1) + 1,
       name: todoRef.current.value,
       status: "Active",
@@ -62,12 +63,44 @@ function App() {
         console.error("Error:", error);
       });
   }
-  function statusChange() {}
+
+  const selectedTodo: undefined | TODO = todos.find(
+    (todo: TODO | undefined) => todo?.id === selectedTodoId
+  );
+  const selectedId = selectedTodo?.id;
+
+  function statusChange() {
+    // selectedActiveTodo?.status === "Completed";
+    return fetch(`http://localhost:3000/todo/${selectedId}`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        status: "Completed",
+      }),
+      headers: {
+        "Content-Type": "application/json ; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+
+      .then((json) => console.log(json));
+  }
+  function deleteTodo() {
+    // selectedActiveTodo?.status === "Completed";
+    return fetch(`http://localhost:3000/todo/${selectedId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json ; charset=UTF-8",
+      },
+      body: JSON.stringify({}),
+    })
+      .then((response) => response.json())
+
+      .then((json) => console.log(json));
+  }
+
   useEffect(() => {
     getTodoList();
   }, []);
-  console.log("TODO", todos);
-  console.log("mode", mode);
 
   return (
     <div
@@ -153,7 +186,7 @@ function App() {
           </div>
           <div style={{ border: "1px solid transparent", borderRadius: "5px" }}>
             <div style={{ borderRadius: "5px" }}>
-              {todos.map((todo: TIME) => {
+              {todos.map((todo: TODO) => {
                 return (
                   <div
                     style={{
@@ -186,18 +219,62 @@ function App() {
                     >
                       {todo.name}
                     </p>
-                    {todo.status === "Active" ? (
-                      <span
+                    {todo.status === "Completed" ? (
+                      <div
                         style={{
                           display: "flex",
                           placeItems: "center",
                           justifyContent: "center",
                           fontSize: "14px",
-                          cursor: "pointer",
+                          paddingRight: "20px",
                         }}
                       >
-                        Complete
-                      </span>
+                        <span
+                          style={{
+                            marginRight: "20px",
+                          }}
+                          onClick={() => setTodoId(todo.id)}
+                        >
+                          Select
+                        </span>
+
+                        <span onClick={() => deleteTodo() && getTodoList()}>
+                          X
+                        </span>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {todo.status === "Active" ? (
+                      <div
+                        style={{
+                          display: "flex",
+                          placeItems: "center",
+                          justifyContent: "center",
+                          fontSize: "14px",
+                          paddingRight: "20px",
+                        }}
+                      >
+                        <span
+                          style={{
+                            marginRight: "20px",
+                          }}
+                          onClick={() => setTodoId(todo.id)}
+                        >
+                          Select
+                        </span>
+                        <span
+                          style={{
+                            marginRight: "20px",
+                          }}
+                          onClick={() => statusChange() && getTodoList()}
+                        >
+                          Complete
+                        </span>
+                        <span onClick={() => deleteTodo() && getTodoList()}>
+                          X
+                        </span>
+                      </div>
                     ) : (
                       ""
                     )}
@@ -208,7 +285,7 @@ function App() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "5fr 6fr 5fr",
+                gridTemplateColumns: "1fr 1fr",
                 backgroundColor:
                   mode === false ? "hsl(235, 24%, 19%)" : "white",
                 height: "40px",
@@ -217,14 +294,6 @@ function App() {
                 borderBottom: "solid 1px grey",
               }}
             >
-              <div
-                style={{
-                  color: mode === false ? "white" : "hsl(235, 24%, 19%)",
-                  textAlign: "start",
-                }}
-              >
-                {todos.length} items left
-              </div>
               <div
                 style={{
                   display: "grid",
@@ -254,8 +323,19 @@ function App() {
                   textAlign: "end",
                 }}
               >
-                Clear Completed
+                {todos.length} items left
               </div>
+              {/* <div
+                style={{
+                  color: mode === false ? "white" : "hsl(235, 24%, 19%)",
+                  textAlign: "end",
+                }}
+              >
+                <span onClick={() => deleteCompletedTodo() && getTodoList()}>
+                  {" "}
+                  Clear Completed
+                </span>
+              </div> */}
             </div>
           </div>
         </div>
