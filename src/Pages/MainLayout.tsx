@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import darkImg from "../../images/bg-desktop-dark.jpg";
-import sun from "../../images/icon-sun.svg";
-import moon from "../../images/icon-moon.svg";
+import lightImg from "../../images/bg-desktop-light.jpg";
+
 import { TODO } from "../App";
 
 import "../App.css";
@@ -81,11 +81,15 @@ export default function MainLayout() {
   return (
     <div
       style={{
-        backgroundColor: mode === false ? "hsl(235, 21%, 11%)" : "white",
+        backgroundColor:
+          mode === false ? "hsl(235, 21%, 11%)" : "hsl(0, 0%, 98%)",
         height: "100vh",
       }}
     >
-      <img style={{ width: "100vw" }} src={darkImg}></img>
+      <img
+        style={{ width: "100vw" }}
+        src={mode === false ? darkImg : lightImg}
+      ></img>
       <div className="App">
         <div
           style={{

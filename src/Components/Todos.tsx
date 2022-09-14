@@ -5,20 +5,21 @@ import "../App.css";
 
 export default function Todos(props) {
   return (
-    <div style={{ border: "1px solid transparent", borderRadius: "5px" }}>
-      <div style={{ borderRadius: "5px" }}>
+    <div>
+      <div>
         {props.todos.map((todo: TODO) => {
           return (
             <div
               style={{
                 display: "grid",
                 gridTemplateColumns: "5fr 1fr",
-
                 backgroundColor:
                   props.mode === false ? "hsl(235, 24%, 19%)" : "white",
                 color: props.mode === false ? "white" : "hsl(235, 24%, 19%)",
                 borderBottom: "solid 1px grey",
+                paddingTop: "8px",
               }}
+              className="todos"
             >
               <p
                 key={todo.id}
@@ -108,6 +109,7 @@ export default function Todos(props) {
         })}
       </div>
       <div
+        className="footer"
         style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
@@ -122,20 +124,29 @@ export default function Todos(props) {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr",
-            textAlign: "start",
-            fontWeight: "800",
+            gridTemplateColumns: "1fr 5fr 1fr",
+            textAlign: "center",
+            fontWeight: "650",
 
-            color: props.mode === false ? "white" : "hsl(235, 24%, 19%)",
+            color: props.mode === false ? "grey" : "hsl(235, 24%, 19%)",
           }}
         >
-          <span style={{ cursor: "pointer" }} onClick={props.getTodoList}>
+          <span
+            className="filter"
+            style={{ cursor: "pointer" }}
+            onClick={props.getTodoList}
+          >
             All
           </span>
-          <span style={{ cursor: "pointer" }} onClick={props.getActiveTodoList}>
+          <span
+            className="filter"
+            style={{ cursor: "pointer" }}
+            onClick={props.getActiveTodoList}
+          >
             Active
           </span>
           <span
+            className="filter"
             style={{ cursor: "pointer" }}
             onClick={props.getCompletedTodoList}
           >
@@ -144,7 +155,7 @@ export default function Todos(props) {
         </div>
         <div
           style={{
-            color: props.mode === false ? "white" : "hsl(235, 24%, 19%)",
+            color: props.mode === false ? "white" : "black",
             textAlign: "end",
           }}
         >

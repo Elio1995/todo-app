@@ -9,5 +9,15 @@
   display: flex;
   place-content: center;
   justify-content: center;
-  font-family: Josefin Sans;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.filter:hover {
+  color: white;
+}
+.todos:first-child {
+  border-radius: 7px 7px 0 0;
+}
+.footer {
+  border-radius: 0 0 7px 7px;
 }

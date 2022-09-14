@@ -1,8 +1,5 @@
-import { useState } from "react";
-
 import sun from "../../images/icon-sun.svg";
 import moon from "../../images/icon-moon.svg";
-import { TODO } from "../App";
 
 import "../App.css";
 
@@ -13,16 +10,16 @@ export default function Header(props: any) {
         <p
           style={{
             textAlign: "start",
-            fontSize: "30px",
+            fontSize: "40px",
             letterSpacing: "10px",
-            fontWeight: "900",
+            fontWeight: "600",
           }}
         >
           TODO
         </p>
         <div
           style={{
-            marginTop: "30px",
+            marginTop: "40px",
             textAlign: "end",
           }}
         >
