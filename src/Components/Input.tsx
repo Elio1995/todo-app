@@ -4,7 +4,7 @@ import { TODO } from "../App";
 
 import "../App.css";
 
-export default function Input(props) {
+export default function Input(props: any) {
   const todoRef = useRef();
 
   function handleSubmit(e: any) {

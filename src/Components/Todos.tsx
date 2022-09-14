@@ -3,7 +3,7 @@ import { TODO } from "../App";
 
 import "../App.css";
 
-export default function Todos(props) {
+export default function Todos(props: any) {
   return (
     <div
       style={{
@@ -36,6 +36,7 @@ export default function Todos(props) {
                   paddingLeft: "30px",
                   display: "flex",
                   placeItems: "center",
+                  fontWeight: "600",
                   color:
                     todo.status === "Completed"
                       ? props.mode === false
@@ -136,7 +137,7 @@ export default function Todos(props) {
             textAlign: "center",
             fontWeight: "650",
 
-            color: props.mode === false ? "grey" : "hsl(235, 24%, 19%)",
+            color: props.mode === false ? "grey" : "hsl(235, 19%, 35%)",
           }}
         >
           <span
