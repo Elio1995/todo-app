@@ -64,7 +64,8 @@ export default function Input(props: any) {
               padding: "0",
               backgroundColor:
                 props.mode === false ? "hsl(235, 24%, 19%)" : "white",
-              color: props.mode === false ? "white" : "hsl(235, 24%, 19%)",
+              color: props.mode === false ? "white" : "hsl(235, 19%, 35%)",
+              fontWeight: "600",
             }}
             // disabled={loading}
             type="submit"

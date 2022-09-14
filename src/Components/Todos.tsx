@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import { TODO } from "../App";
 
 import "../App.css";
@@ -40,10 +39,10 @@ export default function Todos(props: any) {
                   color:
                     todo.status === "Completed"
                       ? props.mode === false
-                        ? "grey"
+                        ? "hsl(236, 9%, 61%)"
                         : "hsl(236, 9%, 61%)"
                       : props.mode === false
-                      ? "white"
+                      ? "hsl(233, 11%, 84%)"
                       : "hsl(235, 19%, 35%)",
                   textDecorationLine:
                     todo.status === "Completed" ? "line-through" : "none",
@@ -137,25 +136,25 @@ export default function Todos(props: any) {
             textAlign: "center",
             fontWeight: "650",
 
-            color: props.mode === false ? "grey" : "hsl(235, 19%, 35%)",
+            color: props.mode === false ? "grey" : "hsl(236, 9%, 61%)",
           }}
         >
           <span
-            className="filter"
+            className={props.mode === false ? "filterDark" : "filterLight"}
             style={{ cursor: "pointer" }}
             onClick={props.getTodoList}
           >
             All
           </span>
           <span
-            className="filter"
+            className={props.mode === false ? "filterDark" : "filterLight"}
             style={{ cursor: "pointer" }}
             onClick={props.getActiveTodoList}
           >
             Active
           </span>
           <span
-            className="filter"
+            className={props.mode === false ? "filterDark" : "filterLight"}
             style={{ cursor: "pointer" }}
             onClick={props.getCompletedTodoList}
           >
@@ -164,7 +163,7 @@ export default function Todos(props: any) {
         </div>
         <div
           style={{
-            color: props.mode === false ? "white" : "black",
+            color: props.mode === false ? "grey" : "hsl(236, 9%, 61%)",
             textAlign: "end",
           }}
         >

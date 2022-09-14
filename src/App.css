@@ -12,8 +12,11 @@
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
-.filter:hover {
+.filterDark:hover {
   color: white;
+}
+.filterLight:hover {
+  color: hsl(235, 19%, 35%);
 }
 .todos:first-child {
   border-radius: 7px 7px 0 0;
