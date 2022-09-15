@@ -67,18 +67,27 @@ export default function Todos(props: any) {
                     paddingRight: "20px",
                   }}
                 >
-                  <span
+                  <div
                     style={{
                       marginRight: "20px",
+                      cursor: "pointer",
+                      color:
+                        props.mode === false ? "grey" : "hsl(236, 9%, 61%)",
                     }}
-                    onClick={() => props.setTodoId(todo.id)}
                   >
-                    Select
-                  </span>
-
+                    <span
+                      onClick={() => props.setTodoId(todo.id)}
+                      className={
+                        props.mode === false ? "filterDark" : "filterLight"
+                      }
+                    >
+                      Select
+                    </span>
+                  </div>
                   <span
                     style={{
                       marginTop: "5px",
+                      cursor: "pointer",
                     }}
                     onClick={() => props.deleteTodo() && props.getTodoList()}
                   >
@@ -98,18 +107,28 @@ export default function Todos(props: any) {
                     paddingRight: "20px",
                   }}
                 >
-                  <span
+                  <div
                     style={{
                       marginRight: "20px",
+                      cursor: "pointer",
+                      color:
+                        props.mode === false ? "grey" : "hsl(236, 9%, 61%)",
                     }}
-                    onClick={() => props.setTodoId(todo.id)}
                   >
-                    Select
-                  </span>
+                    <span
+                      className={
+                        props.mode === false ? "filterDark" : "filterLight"
+                      }
+                      onClick={() => props.setTodoId(todo.id)}
+                    >
+                      Select
+                    </span>
+                  </div>
                   <span
                     style={{
                       marginRight: "20px",
                       marginTop: "5px",
+                      cursor: "pointer",
                     }}
                     onClick={() => props.statusChange() && props.getTodoList()}
                   >
@@ -118,6 +137,7 @@ export default function Todos(props: any) {
                   <span
                     style={{
                       marginTop: "5px",
+                      cursor: "pointer",
                     }}
                     onClick={() => props.deleteTodo() && props.getTodoList()}
                   >
@@ -155,7 +175,9 @@ export default function Todos(props: any) {
         >
           <span
             className={props.mode === false ? "filterDark" : "filterLight"}
-            style={{ cursor: "pointer" }}
+            style={{
+              cursor: "pointer",
+            }}
             onClick={props.getTodoList}
           >
             All
