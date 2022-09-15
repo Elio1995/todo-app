@@ -94,7 +94,7 @@ export default function MainLayout() {
         <div
           style={{
             position: "absolute",
-            top: "40px",
+            top: "20px",
             width: "500px",
             height: "600px",
           }}

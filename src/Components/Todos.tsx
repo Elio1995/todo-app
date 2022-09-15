@@ -1,14 +1,22 @@
+import Completed from "../../images/checked.png";
+import Delete from "../../images/close.png";
 import { TODO } from "../App";
-
 import "../App.css";
 
 export default function Todos(props: any) {
+  const activeTodo = props.todos.filter(
+    (todo: TODO) => todo.status === "Active"
+  );
   return (
     <div
       style={{
         boxShadow: props.mode === true ? "0 10px 10px -5px #E0E0E0" : "none",
       }}
     >
+      <p style={{ marginTop: "0px", textAlign: "start" }}>
+        If you want to complete or delete a todo, select it first and then
+        complete or delete it
+      </p>
       <div>
         {props.todos.map((todo: TODO) => {
           return (
@@ -23,7 +31,6 @@ export default function Todos(props: any) {
                   props.mode === true
                     ? "solid 1px hsl(236, 33%, 92%)"
                     : "solid 1px grey",
-                paddingTop: "8px",
               }}
               className="todos"
             >
@@ -70,9 +77,12 @@ export default function Todos(props: any) {
                   </span>
 
                   <span
+                    style={{
+                      marginTop: "5px",
+                    }}
                     onClick={() => props.deleteTodo() && props.getTodoList()}
                   >
-                    X
+                    <img width="20px" height="20px" src={Delete}></img>
                   </span>
                 </div>
               ) : (
@@ -99,15 +109,19 @@ export default function Todos(props: any) {
                   <span
                     style={{
                       marginRight: "20px",
+                      marginTop: "5px",
                     }}
                     onClick={() => props.statusChange() && props.getTodoList()}
                   >
-                    Complete
+                    <img width="20px" height="20px" src={Completed}></img>
                   </span>
                   <span
+                    style={{
+                      marginTop: "5px",
+                    }}
                     onClick={() => props.deleteTodo() && props.getTodoList()}
                   >
-                    X
+                    <img width="20px" height="20px" src={Delete}></img>
                   </span>
                 </div>
               ) : (
@@ -167,7 +181,7 @@ export default function Todos(props: any) {
             textAlign: "end",
           }}
         >
-          {props.todos.length} items left
+          {activeTodo.length} items left
         </div>
       </div>
     </div>

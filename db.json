@@ -3,7 +3,7 @@
     {
       "id": 4,
       "name": "Read for 1 hour",
-      "status": "Active"
+      "status": "Completed"
     },
     {
       "id": 5,
@@ -28,6 +28,11 @@
     {
       "id": 995.4251945536749,
       "name": "Listen to music for 1 hour",
+      "status": "Active"
+    },
+    {
+      "id": 908.7701931741043,
+      "name": "Finish the project",
       "status": "Active"
     }
   ]
