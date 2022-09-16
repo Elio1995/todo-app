@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import Completed from "../../images/checked.png";
 import Delete from "../../images/close.png";
 import { TODO } from "../App";

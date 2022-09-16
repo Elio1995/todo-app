@@ -1,7 +1,7 @@
+//@ts-nocheck
+
 import { useRef } from "react";
-
 import { TODO } from "../App";
-
 import "../App.css";
 
 export default function Input(props: any) {
