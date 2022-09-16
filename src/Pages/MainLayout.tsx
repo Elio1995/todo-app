@@ -1,19 +1,12 @@
+//@ts-nocheck
 import { useEffect, useState } from "react";
 import darkImg from "../../images/bg-desktop-dark.jpg";
 import lightImg from "../../images/bg-desktop-light.jpg";
-
-import { TODO } from "../App";
-
-import "../App.css";
 import Header from "../Components/Header";
 import Input from "../Components/Input";
 import Todos from "../Components/Todos";
-
-// interface TODO {
-//   id: number;
-//   name: string;
-//   status: string;
-// }
+import { TODO } from "../App";
+import "../App.css";
 
 export default function MainLayout() {
   const [todos, setTodos] = useState([]);
