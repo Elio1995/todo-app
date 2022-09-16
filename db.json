@@ -11,19 +11,9 @@
       "status": "Completed"
     },
     {
-      "id": 767.123225056013,
-      "name": "Write some code",
-      "status": "Completed"
-    },
-    {
-      "id": 962.3111118250409,
-      "name": "Meeting a friend",
-      "status": "Active"
-    },
-    {
       "id": 82.84676677465492,
       "name": "Workout for 1h",
-      "status": "Active"
+      "status": "Completed"
     },
     {
       "id": 995.4251945536749,
@@ -33,6 +23,16 @@
     {
       "id": 908.7701931741043,
       "name": "Finish the project",
+      "status": "Active"
+    },
+    {
+      "id": 677.4149989804719,
+      "name": "Watch the news ",
+      "status": "Active"
+    },
+    {
+      "id": 14.649320536661401,
+      "name": "Go for a walk for 1h",
       "status": "Active"
     }
   ]
