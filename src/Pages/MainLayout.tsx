@@ -78,6 +78,19 @@ export default function MainLayout() {
     getTodoList();
   }, []);
 
+  // Function to update list on drop
+  const handleDrop = (droppedItem) => {
+    // Ignore drop outside droppable container
+    if (!droppedItem.destination) return;
+    var updatedList = [...todos];
+    // Remove dragged item
+    const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
+    // Add dropped item
+    updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
+    // Update State
+    setTodos(updatedList);
+  };
+
   return (
     <div
       style={{
@@ -111,7 +124,11 @@ export default function MainLayout() {
             deleteTodo={deleteTodo}
             mode={mode}
             setTodoId={setTodoId}
+            handleDrop={handleDrop}
           />
+          <p style={{ color: mode === false ? "grey" : "hsl(236, 9%, 61%)" }}>
+            Drag and drop to reorder list
+          </p>
         </div>
       </div>
     </div>
